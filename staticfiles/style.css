@@ -1,0 +1,13 @@
+.color{
+	width: 30px;
+	height: 30px;
+	margin:5px;
+	display: inline-block;
+}
+.colors{
+	display: flex;
+
+}
+.colors > *{
+	display: inline-block;
+}
