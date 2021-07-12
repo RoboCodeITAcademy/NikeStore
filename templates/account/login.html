@@ -1,0 +1,49 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+  <title>Kirish | NikeStore</title>
+</head>
+<body>
+  <div class="container">
+    <br>
+    <br>
+    <div class="row">
+      <div class="col m12">
+     
+        <div class="card-panel z-depth-3 ">
+          <div class="row">
+               <div class="col s6">
+              <div class="header">
+              <h4>Kirish</h4>
+              </div>
+              <form class="login" method="POST" action="{% url 'account_login' %}">
+              {% csrf_token %}
+              {{ form|crispy }}
+              {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+              {% endif %}
+              <a class="button secondaryAction" href="{% url 'account_reset_password' %}">Forgot Password?"</a>
+              <button class="btn orange darken-2 waves-effect pulse" type="submit">Sign In</button>
+            </form>
+          </div>         
+          <div class="col s6 ">
+             
+              <img src="/static/img/login.png" width="200" class="responsive-img" alt="">
+          </div>
+          </div>
+       
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
