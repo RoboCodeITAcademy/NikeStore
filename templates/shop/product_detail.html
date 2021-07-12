@@ -97,12 +97,23 @@
                                 Rangi - <div class="color"
                                 style="background-color: {{object.color}};"></div>
                                 <br>
-                                Boshqa ranglari - 
-                                {% for  color in object.other_colors.all %}
-                                <div class="color"
-                                style="background-color: {{color}};"></div>
-                                {% endfor %}
+                                <div class="row">
+                                  <div class="col-sm-8">
+                                    Boshqa ranglari - 
+                                    {% for  color in object.other_colors.all %}
+                                    <div class="color"
+                                    style="background-color: {{color}};"></div>
+                                    {% endfor %}
+                                  </div>
+                                  <div class="col-sm-4">
+                                    Teglari - 
+                                    {% for tag in product.tag.all %}
+                                    <span class="badge badge-primary">{{tag.name}}</span>
+                                    {% endfor %}
+                                  </div>
+                                </div>                                
                               </p>
+           
                               <p>
                                 Obmorda - 
                                 {% if object.instock %}

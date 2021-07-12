@@ -17,9 +17,9 @@
   <body>
     <div class="adminx-container">
       <nav class="navbar navbar-expand justify-content-between fixed-top">
-        <a class="navbar-brand mb-0 h1 d-none d-md-block" href="index.html">
-          <img src="./demo/img/logo.png" class="navbar-brand-image d-inline-block align-top mr-2" alt="">
-          AdminX
+        <a class="navbar-brand mb-0 h1 d-none d-md-block" href="{% url 'shop:home' %}">
+          <img src="/static/img/nike.png" class="navbar-brand-image d-inline-block align-top mr-2" alt="">
+          NikeStore
         </a>
 
         <form class="form-inline form-quicksearch d-none d-md-block mx-auto">
@@ -29,7 +29,7 @@
                 <i data-feather="search"></i>
               </div>
             </div>
-            <input type="text" class="form-control" id="search" placeholder="Type to search...">
+            <input type="text" class="form-control" id="search" placeholder="Tovar izlash...">
           </div>
         </form>
 
@@ -49,7 +49,7 @@
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-notifications" aria-labelledby="dropdownNotifications">
               <div class="notifications-header d-flex justify-content-between align-items-center">
                 <span class="notifications-header-title">
-                  Notifications
+                  Savatchadagi barcha tovarlar
                 </span>
                 <a href="#" class="d-flex"><small>Mark all as read</small></a>
               </div>
@@ -108,29 +108,15 @@
       <div class="adminx-sidebar expand-hover push">
         <ul class="sidebar-nav">
           <li class="sidebar-nav-item">
-            <a href="index.html" class="sidebar-nav-link active">
+            <a href="{% url 'shop:home' %}" class="sidebar-nav-link active">
               <span class="sidebar-nav-icon">
                 <i data-feather="home"></i>
               </span>
               <span class="sidebar-nav-name">
-                Dashboard
+                Bosh sahifa
               </span>
               <span class="sidebar-nav-end">
 
-              </span>
-            </a>
-          </li>
-
-          <li class="sidebar-nav-item">
-            <a href="#" class="sidebar-nav-link">
-              <span class="sidebar-nav-icon">
-                <i data-feather="layout"></i>
-              </span>
-              <span class="sidebar-nav-name">
-                Layout Options
-              </span>
-              <span class="sidebar-nav-end">
-                <span class="badge badge-info">4</span>
               </span>
             </a>
           </li>
@@ -141,7 +127,7 @@
                 <i data-feather="pie-chart"></i>
               </span>
               <span class="sidebar-nav-name">
-                Charts
+                Kategoriyalar
               </span>
               <span class="sidebar-nav-end">
                 <i data-feather="chevron-right" class="nav-collapse-icon"></i>
@@ -149,27 +135,18 @@
             </a>
 
             <ul class="sidebar-sub-nav collapse" id="example">
+              {% for cat in categories %}
               <li class="sidebar-nav-item">
-                <a href="./layouts/charts_chartjs.html" class="sidebar-nav-link">
+                <a href="{{cat.get_absolute_url}}" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Ch
+                    {{cat.name|slice:'2'}}
                   </span>
                   <span class="sidebar-nav-name">
-                    ChartJS
+                    {{cat.name}}
                   </span>
                 </a>
               </li>
-
-              <li class="sidebar-nav-item">
-                <a href="./layouts/charts_morris.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    Mo
-                  </span>
-                  <span class="sidebar-nav-name">
-                    Morris
-                  </span>
-                </a>
-              </li>
+              {% endfor %}
             </ul>
           </li>
 
@@ -179,7 +156,7 @@
                 <i data-feather="align-justify"></i>
               </span>
               <span class="sidebar-nav-name">
-                Tables
+                Teglar
               </span>
               <span class="sidebar-nav-end">
                 <i data-feather="chevron-right" class="nav-collapse-icon"></i>
@@ -187,27 +164,18 @@
             </a>
 
             <ul class="sidebar-sub-nav collapse" id="navTables">
+              {% for tag in tags %}
               <li class="sidebar-nav-item">
-                <a href="./layouts/tables.html" class="sidebar-nav-link">
+                <a href="{{tag.get_absolute_url}}" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Re
+                    {{tag.name|slice:'2'}}
                   </span>
                   <span class="sidebar-nav-name">
-                    Regular Tables
+                    {{tag.name}}
                   </span>
                 </a>
               </li>
-
-              <li class="sidebar-nav-item">
-                <a href="./layouts/tables_data.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    Da
-                  </span>
-                  <span class="sidebar-nav-name">
-                    Data Tables
-                  </span>
-                </a>
-              </li>
+              {% endfor %}
             </ul>
           </li>
 

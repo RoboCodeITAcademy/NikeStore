@@ -19,6 +19,12 @@
                 <li class="breadcrumb-item active" aria-current="page">Tovarlar</li>
               </ol>
             </nav>
+
+            <div class="pb-3">
+              <h1>Barcha tovarlar</h1>
+            </div>
+
+
             <div class="row">
               <div class="col-lg-8">
                 <div class="card">
@@ -50,7 +56,9 @@
                   <div class="card-body collapse show" id="card1">
 
                       <div class="row">
-                        {% for product in object_list %}
+                        {% if products %}                         
+                        
+                        {% for product in products %}
                         <div class="col-sm-4">
                           <div class="card">
                             <img src="{{product.image.url}}" alt="" class="card-img-top">
@@ -67,6 +75,15 @@
                           </div>
                         </div>
                         {% endfor %}
+
+                        {% else %}
+                        <center>
+                           <div class="alert alert-warning text-center">
+                              <h2>Tovarlar topilmadi !</h2>
+                            </div>
+                        </center>
+                           
+                        {% endif %}
                       </div>
                     <div class="row">
                       <div class="col-sm-12">
@@ -92,7 +109,7 @@
                   </div>
                 </div>
               </div>
-               <div class="col-lg-4">
+              <div class="col-lg-4">
                  <div class="card">
                   <div class="card-header">
                     Kategoriyalar

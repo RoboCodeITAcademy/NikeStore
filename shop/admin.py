@@ -11,6 +11,12 @@ class CategoryAdmin(admin.ModelAdmin):
 	list_display = ['name',]
 	list_display_links = ['name',]
 	prepopulated_fields = {'slug':('name',)}
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+	list_display = ['name',]
+	list_display_links = ['name',]
+	prepopulated_fields = {'slug':('name',)}
 # Product
 @admin.register(Product)
 class ProAdmin(admin.ModelAdmin):
