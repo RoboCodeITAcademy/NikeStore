@@ -9,4 +9,6 @@ urlpatterns = [
 
     path('category/<slug:category_slug>/', views.categoryDetail,name='category_detail'),
     path('tag/<slug:tag_slug>/', views.tagDetail,name='tag_detail'),
+
+    path('accounts/profile/', views.profile, name='profile')
 ]

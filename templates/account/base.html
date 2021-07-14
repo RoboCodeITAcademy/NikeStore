@@ -4,27 +4,37 @@
     <title>{% block head_title %}{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
-      <link rel="stylesheet" type="text/css" href="/static/dist/css/adminx.css" media="screen" />
-    <link rel="stylesheet" href="/static/style.css">
+     <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </head>
   <body>
     {% block body %}
 
-    {% if messages %}
-    <div>
-      <strong>Messages:</strong>
-      <ul>
-        {% for message in messages %}
-        <li>{{message}}</li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
 
-    <div>
-      <strong>Menu:</strong>
-      <ul>
-        {% if user.is_authenticated %}
+<style>
+  .nav-wrapper  a{
+    color: black;
+  }
+  .nav-wrapper{
+    padding:0px 80px 0px 80px;
+  }
+  #mess{
+    width: 25%;
+    position:fixed;
+    top:15%;
+    left:35%;
+  }
+</style>
+  <nav>
+    <div class="nav-wrapper grey lighten-5 ">
+      <a href="#" class="brand-logo">
+        Notes
+      </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+       {% if user.is_authenticated %}
         <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
         <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
         {% else %}
@@ -33,16 +43,38 @@
         {% endif %}
       </ul>
     </div>
-    {% block content %}
-    {% endblock %}
-    {% endblock %}
-    {% block extra_body %}
-    {% endblock %}
+  </nav>
 
-       <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-    <script src="/static/dist/js/vendor.js"></script>
-    <script src="/static/dist/js/adminx.js"></script>
+      {% if messages %}
+      {% if messages.tags %}
+      {% for tag in messages.tags.all %}      
+        <div class="card-panel z-depth-3 {{tag}}" id="mess">
+          <a href="#" class="close btn pulse"
+             onclick="document.getElementById('mess').style='display:none;'">
+            <i class="material-icons">clear</i>
+          </a>
+                <div class="messages">
+                  <strong>Messages:</strong>
+                  <ul>
+                    {% for message in messages %}
+                    <li>{{message}}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+            </div>
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+    
+    {% endblock %}
+    <div class="container">
+       {% block extra_body %}
+        {% endblock %}
+    </div>
+   
   </body>
 </html>

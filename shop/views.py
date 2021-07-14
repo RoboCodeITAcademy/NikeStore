@@ -30,3 +30,13 @@ def tagDetail(request,tag_slug):
 		'products':products
 	}
 	return render(request, 'product_list.html', context)
+
+
+def profile(request):
+	user = request.user
+	s_user = user.socialaccount_set.all()[0]
+	d = s_user.extra_data
+	data = {
+		'data':d
+	}
+	return render(request, 'account/profile.html', {'data':data})
