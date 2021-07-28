@@ -1,0 +1,44 @@
+{% extends '../wrapper.html' %}
+{% load static %}
+{% block content %}
+    {% block title %} <title>Savatcha | {{ request.user.username }}</title>{% endblock %}
+<div class="adminx-content">
+<div class="adminx-main-content">
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card p-5">
+                <div class="card-header">
+                    <h5>Savatcha</h5>
+                </div>
+                  <table class="table ">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                        </tr>
+                      </tbody>
+                    </table>
+            </div>
+
+
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}

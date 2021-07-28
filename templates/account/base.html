@@ -31,15 +31,15 @@
   <nav>
     <div class="nav-wrapper grey lighten-5 ">
       <a href="#" class="brand-logo">
-        Notes
+        NikeStore
       </a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
        {% if user.is_authenticated %}
-        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
-        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+        <li><a href="{% url 'account_email' %}" class="btn blue darken-2 white-text">Emailni o'zgartirish</a></li>
+        <li><a href="{% url 'account_logout' %}" class="btn blue darken-2 white-text">Chiqish</a></li>
         {% else %}
-        <li><a href="{% url 'account_login' %}">Sign In</a></li>
-        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+        <li><a href="{% url 'account_login' %}" class="btn blue darken-2 white-text">Kirish</a></li>
+        <li><a href="{% url 'account_signup' %}" class="btn blue darken-2 white-text">A'zo bo'lish</a></li>
         {% endif %}
       </ul>
     </div>

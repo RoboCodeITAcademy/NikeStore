@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
+    'cart',
 
     # Social Prodivers
     'allauth.socialaccount.providers.yandex',

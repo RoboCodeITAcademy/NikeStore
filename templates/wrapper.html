@@ -55,42 +55,42 @@
               </div>
 
               <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action unread">
-                  <p class="mb-1">Invitation for <strong>Lunch</strong> on <strong>Jan 12th 2018</strong> by <strong>Laura</strong></p>
+                  {% for cart in cart.products.all %}
+                      {% with cart as product %}
+                          <a href="#" class="list-group-item list-group-item-action unread">
+                                 <p class="float-right">
+                                    <img src="{{ product.product.image.url }}" width="80" alt="">
+                                </p>
+                              <p class="mb-1">
+                                   <strong>{{ product.product.name }}</strong>
+                                  <br>
+                                 <strong>${{ product.price }}</strong>
+                              </p>
 
-                  <div class="mb-1">
-                    <button type="button" class="btn btn-primary btn-sm">Accept invite</button>
-                    <button type="button" class="btn btn-outline-danger btn-sm">Decline</button>
-                  </div>
+                              <div class="mb-1">
+                                <button type="button" class="btn btn-primary btn-sm">Savatchaga o'tish</button>
+                                <button type="button" class="btn btn-outline-danger btn-sm">O'chirish</button>
+                              </div>
+                            </a>
+                      {% endwith %}
 
-                  <small>1 hour ago</small>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action">
-                  <p class="mb-1"><strong class="text-success">Goal completed</strong><br />1,000 new members today</p>
-                  <small>3 days ago</small>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action">
-                  <p class="mb-1 text-danger"><strong>System error detected</strong></p>
-                  <small>3 days ago</small>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action">
-                  <p class="mb-1">Your task <strong>Design Draft</strong> is due today.</p>
-                  <small>4 days ago</small>
-                </a>
+                  {% endfor %}
               </div>
 
               <div class="notifications-footer text-center">
-                <a href="#"><small>View all notifications</small></a>
+                <a href="{% url 'cart:cart'  %}"><small>Barcha tovarlarni ko'rish</small></a>
               </div>
             </div>
           </li>
           <!-- Notifications -->
           <li class="nav-item dropdown">
             <a class="nav-link avatar-with-name" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">
-              <img src="/static/img/man.png" class="d-inline-block align-top" alt="">
+                {% if request.user.is_authenticated %}
+                <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" class="d-inline-block align-top" alt="">
+                {% else %}
+                    <img src="/static/img/man.png" class="d-inline-block align-top" alt="">
+                {% endif %}
+
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="#">My Profile</a>
@@ -190,114 +190,6 @@
             </ul>
           </li>
 
-          <li class="sidebar-nav-item">
-            <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#navForms" aria-expanded="false" aria-controls="navForms">
-              <span class="sidebar-nav-icon">
-                <i data-feather="edit"></i>
-              </span>
-              <span class="sidebar-nav-name">
-                Forms
-              </span>
-              <span class="sidebar-nav-end">
-                <i data-feather="chevron-right" class="nav-collapse-icon"></i>
-              </span>
-            </a>
-
-            <ul class="sidebar-sub-nav collapse" id="navForms">
-              <li class="sidebar-nav-item">
-                <a href="./layouts/form_elements.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    El
-                  </span>
-                  <span class="sidebar-nav-name">
-                    Elements
-                  </span>
-                </a>
-              </li>
-
-              <li class="sidebar-nav-item">
-                <a href="./layouts/form_advanced.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    Ad
-                  </span>
-                  <span class="sidebar-nav-name">
-                    Advanced Elements
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="sidebar-nav-item">
-            <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#navUI" aria-expanded="false" aria-controls="navUI">
-              <span class="sidebar-nav-icon">
-                <i data-feather="grid"></i>
-              </span>
-              <span class="sidebar-nav-name">
-                UI Elements
-              </span>
-              <span class="sidebar-nav-end">
-                    <i data-feather="chevron-right" class="nav-collapse-icon"></i>
-              </span>
-            </a>
-
-            <ul class="sidebar-sub-nav collapse" id="navUI">
-              <li class="sidebar-nav-item">
-                <a href="./layouts/icons.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    Ic
-                  </span>
-                  <span class="sidebar-nav-name">
-                    Icons
-                  </span>
-                </a>
-              </li>
-
-              <li class="sidebar-nav-item">
-                <a href="./layouts/buttons.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    Bu
-                  </span>
-                  <span class="sidebar-nav-name">
-                    Buttons
-                  </span>
-                </a>
-              </li>
-
-              <li class="sidebar-nav-item">
-                <a href="./layouts/notifications.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    No
-                  </span>
-                  <span class="sidebar-nav-name">
-                    Notifications
-                  </span>
-                </a>
-              </li>
-
-              <li class="sidebar-nav-item">
-                <a href="./layouts/progress.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    Pr
-                  </span>
-                  <span class="sidebar-nav-name">
-                    Progress Bars
-                  </span>
-                </a>
-              </li>
-
-              <li class="sidebar-nav-item">
-                <a href="./layouts/tabs.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    Ta
-                  </span>
-                  <span class="sidebar-nav-name">
-                    Tabs
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </li>
 
           <li class="sidebar-nav-item">
             <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#navExtra" aria-expanded="false" aria-controls="navExtra">
@@ -305,7 +197,7 @@
                 <i data-feather="layers"></i>
               </span>
               <span class="sidebar-nav-name">
-                Other Layouts
+                Boshqa sahifalar
               </span>
               <span class="sidebar-nav-end">
                 <i data-feather="chevron-right" class="nav-collapse-icon"></i>
@@ -316,65 +208,10 @@
               <li class="sidebar-nav-item">
                 <a href="./layouts/login.html" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Lo
+                    Al
                   </span>
                   <span class="sidebar-nav-name">
-                    Login
-                  </span>
-                </a>
-              </li>
-
-              <li class="sidebar-nav-item">
-                <a href="./layouts/signup.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    Si
-                  </span>
-                  <span class="sidebar-nav-name">
-                    Sign Up
-                  </span>
-                </a>
-              </li>
-
-              <li class="sidebar-nav-item">
-                <a href="./layouts/404.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    Nf
-                  </span>
-                  <span class="sidebar-nav-name">
-                    404 Error
-                  </span>
-                </a>
-              </li>
-
-              <li class="sidebar-nav-item">
-                <a href="./layouts/500.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    Is
-                  </span>
-                  <span class="sidebar-nav-name">
-                    500 Error
-                  </span>
-                </a>
-              </li>
-
-              <li class="sidebar-nav-item">
-                <a href="./layouts/timeline.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    Ti
-                  </span>
-                  <span class="sidebar-nav-name">
-                    Timeline
-                  </span>
-                </a>
-              </li>
-
-              <li class="sidebar-nav-item">
-                <a href="./layouts/invoice.html" class="sidebar-nav-link">
-                  <span class="sidebar-nav-abbr">
-                    In
-                  </span>
-                  <span class="sidebar-nav-name">
-                    Invoice
+                    Aloqa
                   </span>
                 </a>
               </li>
@@ -391,6 +228,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     <script src="/static/dist/js/vendor.js"></script>
     <script src="/static/dist/js/adminx.js"></script>
+    <script src="/static/cart.js"></script>
 
     <!-- If you prefer vanilla JS these are the only required scripts -->
     <!-- script src="./dist/js/vendor.js"></script>

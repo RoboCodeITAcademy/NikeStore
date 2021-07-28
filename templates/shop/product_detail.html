@@ -123,10 +123,20 @@
                                 {% endif %}
                               </p>
                               <p>Soni - {{object.count}}</p>
-                               <a href="#" class="btn btn-primary">
-                                <i data-feather='shopping-cart'></i>
-                                Savatchaga olish
-                              </a>
+                                <p>
+                                    <select class="custom-select" id="quantity">
+                                          <option value="1">Sonini belgilang</option>
+                                          <option value="2">2 ta</option>
+                                          <option value="3">3 ta</option>
+                                          <option value="4">4 ta</option>
+                                          <option value="5">5 ta</option>
+                                        </select>
+
+                                </p>
+                                   <a href="#" onclick="AddToCart({{ object.id }})" class="btn btn-primary">
+                                    <i data-feather='shopping-cart'></i>
+                                        Savatchaga olish
+                                  </a>
                             </div>
 
                           </div>
