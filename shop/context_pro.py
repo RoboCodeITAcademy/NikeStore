@@ -9,6 +9,7 @@ def view_all(request):
 	context = {
 		'categories':Category.objects.all(),
 		'tags':Tag.objects.all(),
-		'cart':cart
+		'cart':cart,
+		'random_products':Product.objects.all().order_by('?')
 	}
 	return context

@@ -61,27 +61,24 @@
                         {% for product in products %}
                         <div class="col-sm-4">
                           <div class="card">
-                            <img src="{{product.image.url}}" alt="" class="card-img-top">
-                            
-                          
-                            <div class="card-body">
-                              <h5>{{product.name}}</h5>
-                              <p>{{product.description|truncatewords:'10'}}</p>
-                               <a href="{% url 'shop:product_detail' product.id %}" class="btn btn-primary">
-                                Batafsil
-                              </a>
+                                <a href="{% url 'shop:product_detail' product.id %}">
+                                       <img src="{{product.image.url}}" alt="" class="card-img-top">
+                                   </a>
+                              <div class="card-body">
+                                <a href="{% url 'shop:product_detail' product.id %}" >
+                                  <h5>{{product.name}}<i data-feather="arrow-right"></i></h5>
+                                </a>
                             </div>
-
                           </div>
                         </div>
                         {% endfor %}
-
+                            <br>
                         {% else %}
-                        <center>
-                           <div class="alert alert-warning text-center">
+
+                           <div class="alert alert-warning text-center m-auto">
                               <h2>Tovarlar topilmadi !</h2>
                             </div>
-                        </center>
+
                            
                         {% endif %}
                       </div>
@@ -95,7 +92,7 @@
                                 {% endif %}
 
                                 <span class="current">
-                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                    Sahifa {{ page_obj.number }} dan {{ page_obj.paginator.num_pages }}.
                                 </span>
 
                                 {% if page_obj.has_next %}
@@ -122,7 +119,7 @@
                       {% endfor %}
                   </div>
                 </div>  
-                <div class="card">
+                <div class="card mt-3">
                   <div class="card-header">
                     Teglar
                   </div>
@@ -132,6 +129,18 @@
                        <span class="btn btn-primary btn-sm text-decoration-none">{{tag.name}}</span>
                      </a>
                       
+                      {% endfor %}
+                  </div>
+                </div>
+                 <div class="card mt-3">
+                  <div class="card-header">
+                    Top tovarlar
+                  </div>
+                  <div class="card-body">
+                     {% for tag in random_products %}
+                     <a href="{% url 'shop:product_detail' tag.id %}">
+                       <span class="btn btn-outline-info btn-sm text-decoration-none">{{tag.name}}</span>
+                     </a>
                       {% endfor %}
                   </div>
                 </div>

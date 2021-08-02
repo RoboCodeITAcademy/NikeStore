@@ -121,7 +121,7 @@ AUTHENTICATION_BACKENDS = [
 
 ]
 LOGIN_URL = 'accounts/login/'
-LOGIN_REDIRECT_URL = '/accounts/profile/'
+LOGIN_REDIRECT_URL = '/'
 # LOGOUT_URL = ''
 SITE_ID = 1
 

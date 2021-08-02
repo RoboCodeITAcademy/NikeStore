@@ -11,19 +11,20 @@
 	<title>Chiqish | NikeStore</title>
 </head>
 <body>
+<br><br><br>
 	<div class="container">
 		<div class="row">
 			<div class="col s12">
 				<div class="card-panel">
-					<h1>Sign Out</h1>
-					<p>Are you sure you want to sign out?</p>
+					<h1>Chiqish</h1>
+					<p>Saytdan chiqib ketyapsiz, shu rostmi?</p>
 
 					<form method="post" action="{% url 'account_logout' %}">
 					{% csrf_token %}
 					{% if redirect_field_value %}
 					<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
 					{% endif %}
-					<button type="submit" class="btn">Sign Out</button>
+					<button type="submit" class="btn">Ha chiqaman</button>
 					</form>
 				</div>
 			</div>

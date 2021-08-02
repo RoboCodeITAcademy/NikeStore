@@ -15,7 +15,10 @@ function AddToCart(product_id){
     xhttp.onreadystatechange = function() {
     if (xhttp.readyState === 4 && xhttp.status === 200) {
       var data = JSON.parse(this.responseText);
-        console.log(data)
+      if (data['status'] === 200){
+          var block = document.getElementById('info');
+          block.classList = ['message info-show']
+      }
     }else{
       console.log('not yet')
 

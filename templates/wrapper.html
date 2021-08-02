@@ -8,11 +8,18 @@
 
     <link rel="stylesheet" type="text/css" href="/static/dist/css/adminx.css" media="screen" />
     <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <!-- Compiled and minified CSS -->
 
     <!--
       # Optional Resources
       Feel free to delete these if you don't need them in your project
     -->
+      <script>
+  if ( window.history.replaceState ) {
+   window.history.replaceState( null, null, window.location.href );
+  }
+</script>
   </head>
   <body>
     <div class="adminx-container">
@@ -44,33 +51,39 @@
           <li class="nav-item dropdown d-flex align-items-center mr-2">
             <a class="nav-link nav-link-notifications" id="dropdownNotifications" data-toggle="dropdown" href="#">
               <i data-feather="shopping-cart" class=" display-inline-block align-middle"></i>
-              <span class="nav-link-notification-number">3</span>
+              <span class="nav-link-notification-number">
+                  {% if cart.total_quantity %}
+                      {{ cart.total_quantity }}
+                  {% else %}
+                      0
+                  {% endif %}
+
+              </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-notifications" aria-labelledby="dropdownNotifications">
               <div class="notifications-header d-flex justify-content-between align-items-center">
                 <span class="notifications-header-title">
                   Savatchadagi barcha tovarlar
                 </span>
-                <a href="#" class="d-flex"><small>Mark all as read</small></a>
+                <a href="{% url 'cart:remove' %}" class="d-flex"><big>
+                    <i data-feather="trash-2"></i></big>
+                </a>
               </div>
 
               <div class="list-group">
                   {% for cart in cart.products.all %}
                       {% with cart as product %}
-                          <a href="#" class="list-group-item list-group-item-action unread">
+                          <a href="/cart/" class="list-group-item list-group-item-action unread">
                                  <p class="float-right">
                                     <img src="{{ product.product.image.url }}" width="80" alt="">
                                 </p>
                               <p class="mb-1">
-                                   <strong>{{ product.product.name }}</strong>
+                                   <span>Nomi :</span><strong> {{ product.product.name }}</strong>
                                   <br>
-                                 <strong>${{ product.price }}</strong>
-                              </p>
+                                 <span>Narxi :</span><strong>${{ product.product.price }}</strong>
+                                 <span>Umumiy narxi : <strong>${{ product.get_total_price }}</strong></span>
 
-                              <div class="mb-1">
-                                <button type="button" class="btn btn-primary btn-sm">Savatchaga o'tish</button>
-                                <button type="button" class="btn btn-outline-danger btn-sm">O'chirish</button>
-                              </div>
+                              </p>
                             </a>
                       {% endwith %}
 
@@ -86,17 +99,20 @@
           <li class="nav-item dropdown">
             <a class="nav-link avatar-with-name" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">
                 {% if request.user.is_authenticated %}
-                <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" class="d-inline-block align-top" alt="">
+                    {% if user.socialaccount_set.all.0.get_avatar_url %}
+                         <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" class="d-inline-block align-top" alt="">
+                    {% else %}
+                       <img src="/static/img/man.png" class="d-inline-block align-top" alt="">
+                    {% endif %}
+
                 {% else %}
                     <img src="/static/img/man.png" class="d-inline-block align-top" alt="">
                 {% endif %}
 
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">My Profile</a>
-              <a class="dropdown-item" href="#">My Tasks</a>
-              <a class="dropdown-item" href="#">Settings</a>
-              <div class="dropdown-divider"></div>
+
+
               {% if request.user.is_authenticated %}
               <a class="dropdown-item text-danger"
                href="{% url 'account_logout' %}">
@@ -108,13 +124,29 @@
               <a class="dropdown-item text-danger" href="{% url 'account_login' %}">Kirish</a>
               <a class="dropdown-item text-danger" href="{% url 'account_signup' %}">A'zo bo'lish</a>
               {% endif %}
-                  
+                   <div class="dropdown-divider"></div>
             </div>
           </li>
         </ul>
       </nav>
 
       <!-- expand-hover push -->
+
+    <div class="message info-hide" id="info">
+        <div class="info">
+            <h5>Tovar savatchaga qo'shildi !
+                <a
+                    href="#"
+                    class="float-lg-right font-weight-normal"
+                    onclick="document.getElementById('info').classList = ['message info-hide']"
+                >
+                    <i data-feather="x-square"></i>
+                </a>
+            </h5>
+
+        </div>
+    </div>
+
       <!-- Sidebar -->
       <div class="adminx-sidebar expand-hover push">
         <ul class="sidebar-nav">

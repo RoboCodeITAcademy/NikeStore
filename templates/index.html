@@ -52,18 +52,16 @@
                       <div class="row">
                         {% for product in object_list %}
                         <div class="col-sm-4">
-                          <div class="card">
-                            <img src="{{product.image.url}}" alt="" class="card-img-top">
-                            
-                          
-                            <div class="card-body">
-                              <h5>{{product.name}}</h5>
-                              <p>{{product.description|truncatewords:'10'}}</p>
-                               <a href="{% url 'shop:product_detail' product.id %}" class="btn btn-primary">
-                                Batafsil
-                              </a>
-                            </div>
+                               <div class="card">
+                                   <a href="{% url 'shop:product_detail' product.id %}">
+                                       <img src="{{product.image.url}}" alt="" class="card-img-top">
+                                   </a>
 
+                              <div class="card-body">
+                                <a href="{% url 'shop:product_detail' product.id %}" >
+                                  <h5>{{product.name}}<i data-feather="arrow-right"></i></h5>
+                                </a>
+                            </div>
                           </div>
                         </div>
                         {% endfor %}
@@ -105,7 +103,7 @@
                       {% endfor %}
                   </div>
                 </div>  
-                <div class="card">
+                <div class="card mt-3">
                   <div class="card-header">
                     Teglar
                   </div>
@@ -114,7 +112,18 @@
                      <a href="{{ tag.get_absolute_url }}">
                        <span class="btn btn-primary btn-sm text-decoration-none">{{tag.name}}</span>
                      </a>
-                      
+                      {% endfor %}
+                  </div>
+                </div>
+                <div class="card mt-3">
+                  <div class="card-header">
+                    Top tovarlar
+                  </div>
+                  <div class="card-body">
+                     {% for tag in random_products %}
+                     <a href="{% url 'shop:product_detail' tag.id %}">
+                       <span class="btn btn-outline-info btn-sm text-decoration-none">{{tag.name}}</span>
+                     </a>
                       {% endfor %}
                   </div>
                 </div>
