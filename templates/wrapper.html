@@ -20,8 +20,10 @@
    window.history.replaceState( null, null, window.location.href );
   }
 </script>
+    <script src="../../myMovie/staticfiles/js/init.js"></script>
   </head>
   <body>
+
     <div class="adminx-container">
       <nav class="navbar navbar-expand justify-content-between fixed-top">
         <a class="navbar-brand mb-0 h1 d-none d-md-block" href="{% url 'shop:home' %}">
@@ -36,7 +38,13 @@
                 <i data-feather="search"></i>
               </div>
             </div>
-            <input type="text" class="form-control" id="search" placeholder="Tovar izlash...">
+            <input
+               type="text"
+               class="form-control"
+               id="search"
+               placeholder="Tovar izlash..."
+               onkeyup="liveSearch(this.value)"
+            />
           </div>
         </form>
 
@@ -251,7 +259,11 @@
           </li>
         </ul>
       </div><!-- Sidebar End -->
+      <div class="liveSearch">
+        <div class="m-2" id="results">
 
+        </div>
+      </div>
       {% block content %}
       {% endblock %}
           <!-- If you prefer jQuery these are the required scripts -->

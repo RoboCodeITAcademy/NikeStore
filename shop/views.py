@@ -3,6 +3,7 @@ from django.views.generic import (
 	ListView,
 	DetailView,)
 from .models import *
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -42,3 +43,10 @@ def profile(request):
 		'data':d
 	}
 	return render(request, 'account/profile.html', {'data':data})
+
+def liveSearch(request):
+    data = {}
+    query = request.GET.get('data')
+    movies = list(Product.objects.filter(slug__icontains=query).values())
+    data['products'] = movies
+    return JsonResponse(data)
